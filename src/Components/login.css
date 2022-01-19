@@ -1,0 +1,68 @@
+*{
+    margin:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+.loginScreen {
+	margin-top: 50px;
+}
+
+
+.loginTitle {
+	align-items: center;
+}
+
+.loginCard {
+	margin: 0 auto;
+	width: 850px;
+	margin-top: 100px;
+	box-shadow: 2px 2px 6px rgb(14, 204, 252);
+	border-color: rgba(0, 0, 0, 0);
+	border-width: 0px;
+	border-radius: 40px;
+}
+
+.loginLogo{
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 0;
+    color: rgb(0, 62, 250);
+}
+.loginTitle{
+    text-align: center;
+}
+
+.loginImage {
+	width: 400px;
+	height: 400px;
+    padding-right: 0px;
+	background-repeat: no-repeat;
+	border-bottom-right-radius: 20px;
+	border-top-right-radius: 20px;
+}
+
+.form{
+    width: 380px;
+}
+.buttonLogin{
+
+    align-content: center;
+}
+
+.loginLable {
+	font-weight: bold;
+}
+.loginButton {
+	width: 380px;
+    text-align: center;
+    justify-content: center;
+    flex: 1;
+    flex-direction: row;
+
+}
+
+.loginInput{
+    width: 50px;
+}
