@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
-import { Link,Navigate } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import {  } from 'react-router-dom'
 import { Form, Button, Row, Col, Card, Image } from 'react-bootstrap'
 import loginImage from './Logo.jpg'
 import './login.css'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Home from './Home'
 
 function LoginForm()  {
-
+ 
+	let navigate = useNavigate();
     const [details, setDetails] = useState({name:"", password:""});
     
     const submitHandler = e =>{
@@ -16,21 +16,14 @@ function LoginForm()  {
          Login(details);
  
     }
-	
-	const adminUser ={ // the place where we chack the login details
-        password:"admin@123"
-       }
-     
-       const [user, setUser] = useState({name:""});
+		
        const [error, setError] = useState("");
+
        const Login =details =>{
        console.log(details);
-     
-       if(details.password === adminUser.password){
-			console.log("Logged in");
-			setUser({
-				name:details.name
-			});
+	   
+       if(details.password !== '' && details.password !== '' ){
+		navigate("home/");
 			
             }else{
             console.log("details don't match");
@@ -76,7 +69,7 @@ function LoginForm()  {
 								</Form.Group>
                                 <br/>
 								
-									<Button onClick={()=>{}}
+									<Button
 										className=' loginButton'
 										type='submit'
 										variant='primary'
