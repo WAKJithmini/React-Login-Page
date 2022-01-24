@@ -13,6 +13,10 @@ function LoginForm( )  {
  
 	let navigate = useNavigate();
 	
+	const adminUser={
+		name:'admin',
+		password:'password'
+	}
 	const [errors, setErrors] = useState("");
     const [details, setDetails] = useState({
 		name:"",
@@ -20,7 +24,7 @@ function LoginForm( )  {
 	});
     
 	const dispatch = useDispatch();
-	
+
     const submitHandler = e =>{
          e.preventDefault();
          Login(details);
@@ -42,7 +46,7 @@ function LoginForm( )  {
        const Login =details =>{
        console.log(details);
 	   
-       if(details.password !== '' ){
+       if(details.name === adminUser.name && details.password === adminUser.password){
 		navigate("home/");
 		  }else{
             console.log("details don't match");
@@ -75,7 +79,7 @@ function LoginForm( )  {
 										value={details.name}
 										onChange={handleChange}
 									></Form.Control>
-									{errors.name && <p className="error">"{errors.name}</p>}
+									{errors.name && <p className="error">{errors.name}</p>}
 								</Form.Group>
                                  <br/>
 								<Form.Group controlId='password'>
@@ -88,7 +92,7 @@ function LoginForm( )  {
 										value={details.password}
 										onChange={handleChange}
 									></Form.Control>
-									{errors.password && <p className="error">"{errors.password}</p>}
+									{errors.password && <p className="error">{errors.password}</p>}
 								</Form.Group>
                                 <br/>
 								
