@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import {useDispatch} from "react-redux";
+import {login} from "../Features/userSlice";
 import { Link,useNavigate,useParams } from 'react-router-dom'
 import {  } from 'react-router-dom'
 import { Form, Button, Row, Col, Card, Image } from 'react-bootstrap'
@@ -10,16 +12,27 @@ import Validation from './Validation';
 function LoginForm( )  {
  
 	let navigate = useNavigate();
+	
+	const [errors, setErrors] = useState("");
+    const [name, setName] = useState({name:""});
+	const [password, setPassword] = useState({name:""});
+
     const [details, setDetails] = useState({
 		name:"",
 	    password:""
 	});
     
+	const dispatch = useDispatch();
     const submitHandler = e =>{
          e.preventDefault();
          Login(details);
 		 setErrors(Validation(details));
- 
+         
+		 dispatch(login({
+			...details,
+			[e.target.name]: e.target.value, 
+			loggedIn:true,
+		 }));
     }
 	const handleChange =  (e) =>{
 		setDetails({
@@ -27,17 +40,13 @@ function LoginForm( )  {
 			[e.target.name]: e.target.value,
 		});
 	}	
-    const [errors, setErrors] = useState("");
-    const [user, setUser] = useState({name:""});
+
        const Login =details =>{
        console.log(details);
 	   
        if(details.password !== '' ){
 		navigate("home/");
-		setUser({
-			name:details.name
-		})
-            }else{
+		  }else{
             console.log("details don't match");
             setErrors("details don't match");
          }
@@ -62,7 +71,7 @@ function LoginForm( )  {
 									<Form.Label className='loginLable'>Username:</Form.Label>
 									<Form.Control
 										className='loginInput'
-										type='text'
+										type='name'
                                         name='name'
 										placeholder='Username'
 										value={details.name}
