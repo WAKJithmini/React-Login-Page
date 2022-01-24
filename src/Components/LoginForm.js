@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useDispatch} from "react-redux";
 import {login} from "../Features/userSlice";
 import { Link,useNavigate} from 'react-router-dom'
-import {  } from 'react-router-dom'
+import { } from 'react-router-dom'
 import { Form, Button, Row, Col, Card, Image } from 'react-bootstrap'
 import loginImage from './Logo.jpg'
 import './login.css'
@@ -26,16 +26,17 @@ function LoginForm( )  {
 	const dispatch = useDispatch();
 
     const submitHandler = e =>{
-         e.preventDefault();
-         Login(details);
-		 setErrors(Validation(details));
+        e.preventDefault();
+        Login(details);
+		setErrors(Validation(details));
          
-		 dispatch(login({
+		dispatch(login({
 			...details,
 			[e.target.name]: e.target.value, 
 			loggedIn:true,
 		 }));
     }
+
 	const handleChange =  (e) =>{
 		setDetails({
 			...details,
@@ -43,16 +44,16 @@ function LoginForm( )  {
 		});
 	}	
 
-       const Login =details =>{
-       console.log(details);
+    const Login =details =>{
+        console.log(details);
 	   
-       if(details.name === adminUser.name && details.password === adminUser.password){
+    if(details.name === adminUser.name && details.password === adminUser.password){
 		navigate("home/");
 		  }else{
             console.log("details don't match");
             setErrors("details don't match");
          }
-       }
+    }
      
 
 	return (
