@@ -3,10 +3,11 @@ import LoginForm from './LoginForm'
 import { Link } from 'react-router-dom'
 import {  Button } from 'react-bootstrap'
 
-const Home = () => {
+const Home = (props) => {
 
     const [user, setUser] = useState({name:""});
     const [error, setError] = useState("");
+    console.log(props);
     
     const Logout =() => {
          setUser({name:""});
@@ -15,8 +16,11 @@ const Home = () => {
     
 	return (
 		<div className="App">
-      {(user.name =="") ? (
-        <div className="welcome">
+      {(user.name !=="") ? (
+        
+        <LoginForm />
+      ): (
+     <div className="welcome">
           <h2>welcome ,{user.name}</h2>
           <Link to='/'>
 				  <Button
@@ -29,9 +33,6 @@ const Home = () => {
 			  	</Button>
 		      </Link>
         </div>
-
-      ): (
-        <LoginForm />
       )}
     </div>
 	)

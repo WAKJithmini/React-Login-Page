@@ -12,6 +12,7 @@ function App () {
 					<Routes>
 						<Route path='/' element={<LoginForm />}/>
 						<Route path='/home' element={<Home />} />
+						<Route path='*'/>
 					</Routes>
 				</Container>
 			</main>

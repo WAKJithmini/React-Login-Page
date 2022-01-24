@@ -36,7 +36,7 @@
 
 .loginImage {
 	width: 400px;
-	height: 400px;
+	height: flex;
     padding-right: 0px;
 	background-repeat: no-repeat;
 	border-bottom-right-radius: 20px;
@@ -65,4 +65,8 @@
 
 .loginInput{
     width: 50px;
+}
+
+.error{
+    color: rgb(250, 0, 0);
 }

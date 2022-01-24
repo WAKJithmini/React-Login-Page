@@ -1,33 +1,45 @@
 import React, {useState} from 'react'
-import { Link,useNavigate } from 'react-router-dom'
+import { Link,useNavigate,useParams } from 'react-router-dom'
 import {  } from 'react-router-dom'
 import { Form, Button, Row, Col, Card, Image } from 'react-bootstrap'
 import loginImage from './Logo.jpg'
 import './login.css'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Validation from './Validation';
 
-function LoginForm()  {
+function LoginForm( )  {
  
 	let navigate = useNavigate();
-    const [details, setDetails] = useState({name:"", password:""});
+    const [details, setDetails] = useState({
+		name:"",
+	    password:""
+	});
     
     const submitHandler = e =>{
          e.preventDefault();
          Login(details);
+		 setErrors(Validation(details));
  
     }
-		
-       const [error, setError] = useState("");
-
+	const handleChange =  (e) =>{
+		setDetails({
+			...details,
+			[e.target.name]: e.target.value,
+		});
+	}	
+    const [errors, setErrors] = useState("");
+    const [user, setUser] = useState({name:""});
        const Login =details =>{
        console.log(details);
 	   
-       if(details.password !== '' && details.password !== '' ){
+       if(details.password !== '' ){
 		navigate("home/");
-			
+		setUser({
+			name:details.name
+		})
             }else{
             console.log("details don't match");
-            setError("details don't match");
+            setErrors("details don't match");
          }
        }
      
@@ -46,7 +58,6 @@ function LoginForm()  {
                            <Form className='form'  onSubmit={submitHandler}>
                            <p className='loginLogo'><AccountCircleIcon/></p>
                            <h1 className='loginTitle'><b>LOGIN</b></h1>
-                            {(error !="") ? ( <div className="error">{error}</div>):""}
                                <Form.Group controlId='name'>
 									<Form.Label className='loginLable'>Username:</Form.Label>
 									<Form.Control
@@ -54,8 +65,10 @@ function LoginForm()  {
 										type='text'
                                         name='name'
 										placeholder='Username'
-                                        onChange={e =>setDetails({...details, name: e.target.value})} value={details.name}
+										value={details.name}
+										onChange={handleChange}
 									></Form.Control>
+									{errors.name && <p className="error">"{errors.name}</p>}
 								</Form.Group>
                                  <br/>
 								<Form.Group controlId='password'>
@@ -63,9 +76,12 @@ function LoginForm()  {
 									<Form.Control
 										className='loginInput'
 										type='password'
+										name ='password'
 										placeholder='Password'
-                                        onChange={e =>setDetails({...details, password: e.target.value})} value={details.password}
+										value={details.password}
+										onChange={handleChange}
 									></Form.Control>
+									{errors.password && <p className="error">"{errors.password}</p>}
 								</Form.Group>
                                 <br/>
 								
@@ -74,6 +90,7 @@ function LoginForm()  {
 										type='submit'
 										variant='primary'
 										value='Login'
+										onClick={submitHandler}
 									>
 										Login
 									</Button>
