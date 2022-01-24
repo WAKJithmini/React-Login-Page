@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useDispatch} from "react-redux";
 import {login} from "../Features/userSlice";
-import { Link,useNavigate,useParams } from 'react-router-dom'
+import { Link,useNavigate} from 'react-router-dom'
 import {  } from 'react-router-dom'
 import { Form, Button, Row, Col, Card, Image } from 'react-bootstrap'
 import loginImage from './Logo.jpg'
@@ -14,15 +14,13 @@ function LoginForm( )  {
 	let navigate = useNavigate();
 	
 	const [errors, setErrors] = useState("");
-    const [name, setName] = useState({name:""});
-	const [password, setPassword] = useState({name:""});
-
     const [details, setDetails] = useState({
 		name:"",
 	    password:""
 	});
     
 	const dispatch = useDispatch();
+	
     const submitHandler = e =>{
          e.preventDefault();
          Login(details);
