@@ -1,4 +1,3 @@
-import LoginForm from './LoginForm';
 const adminUser={
     name:'admin',
     password:'password'
@@ -14,7 +13,8 @@ const Validation = (details) => {
     }
     if(!details.password){
         errors.password='Password cannot be empty';
-    }if(details.password !== adminUser.password){
+    }
+    if(details.password !== adminUser.password){
         errors.password= 'Password is incorrect';
     }
     else if (details.password.length < 5){
