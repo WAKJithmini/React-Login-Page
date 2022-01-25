@@ -46,7 +46,7 @@ function LoginForm( )  {
 
     const Login =details =>{
         console.log(details);
-	   
+		
     if(details.name === adminUser.name && details.password === adminUser.password){
 		navigate("home/");
 		  }else{
@@ -55,7 +55,7 @@ function LoginForm( )  {
          }
     }
      
-
+    
 	return (
 		
 		<div className='Login'>
