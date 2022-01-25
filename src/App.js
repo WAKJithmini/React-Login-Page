@@ -16,8 +16,7 @@ function App () {
 					</Routes>
 				</Container>
 			</main>
-    
-		</Router>
+        </Router>
 	)
 }
 

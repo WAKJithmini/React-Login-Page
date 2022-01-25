@@ -8,22 +8,21 @@ import loginImage from './Logo.jpg'
 import './login.css'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Validation from './Validation';
+import Axios from 'axios';
 
 function LoginForm( )  {
  
 	let navigate = useNavigate();
+
+	const url = 'http://restapi.adequateshop.com/api/authaccount/login'
 	
-	const adminUser={
-		name:'admin',
-		password:'password'
-	}
-	const [errors, setErrors] = useState("");
-    const [details, setDetails] = useState({
-		name:"",
+	const [details, setDetails] = useState({
+		email:"",
 	    password:""
 	});
-    
-	const dispatch = useDispatch();
+
+    const [errors, setErrors] = useState("");
+    const dispatch = useDispatch();
 
     const submitHandler = e =>{
         e.preventDefault();
@@ -34,8 +33,24 @@ function LoginForm( )  {
 			...details,
 			[e.target.name]: e.target.value, 
 			loggedIn:true,
-		 }));
-    }
+		}));
+
+        Axios
+		.post(url, details)
+		.then(res=>{
+			console.log('Posting data',res);
+            setErrors(Validation(details));
+			if (details.email !== '' && details.password !== ''){
+				navigate('/home', {
+					state: {
+					  email: res.data.data.Name ,
+					}
+				  });
+				console.log('success');
+			}
+		}).catch(err =>console.log(err.res))
+
+    };
 
 	const handleChange =  (e) =>{
 		setDetails({
@@ -46,13 +61,6 @@ function LoginForm( )  {
 
     const Login =details =>{
         console.log(details);
-		
-    if(details.name === adminUser.name && details.password === adminUser.password){
-		navigate("home/");
-		  }else{
-            console.log("details don't match");
-            setErrors("details don't match");
-         }
     }
      
     
@@ -70,17 +78,17 @@ function LoginForm( )  {
                            <Form className='form'  onSubmit={submitHandler}>
                            <p className='loginLogo'><AccountCircleIcon/></p>
                            <h1 className='loginTitle'><b>LOGIN</b></h1>
-                               <Form.Group controlId='name'>
-									<Form.Label className='loginLable'>Username:</Form.Label>
+                               <Form.Group controlId='email'>
+									<Form.Label className='loginLable'>Email:</Form.Label>
 									<Form.Control
-										className='loginInput'
-										type='name'
-                                        name='name'
-										placeholder='Username'
-										value={details.name}
+										className='email'
+										type='email'
+                                        name='email'
+										placeholder='Email'
+										value={details.email}
 										onChange={handleChange}
 									></Form.Control>
-									{errors.name && <p className="error">{errors.name}</p>}
+									{errors.email && <p className="error">{errors.email}</p>}
 								</Form.Group>
                                  <br/>
 								<Form.Group controlId='password'>

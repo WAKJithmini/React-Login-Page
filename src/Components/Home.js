@@ -4,15 +4,20 @@ import {  Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../Features/userSlice'
 
+import { useLocation } from 'react-router';
+
 const Home = () => {
     const user =useSelector(selectUser); 
 
     const Logout =(state) => {
       state.user = null; 
     }
+	const location = useLocation();
+  console.log(location);
+
 	return (
 		<div className="logout">
-      <h1>Welcome <span className='name'>{user.name}</span></h1>
+      <h1>Welcome <span className='email'>{location.state.email}</span></h1>
       <Link to='/'>
 				  <Button
 					  className=' loginButton'
