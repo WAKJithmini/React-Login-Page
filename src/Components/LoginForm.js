@@ -36,8 +36,12 @@ function LoginForm( )  {
 			loggedIn:true,
 	}));
 
-	if (!details.email || !details.password) {
-		setErrors('Email and Password required');
+	if (!details.email && !details.password ) {
+		setErrors('Email and Password is required');
+	  } else if(!details.password){
+		setErrors('Password is required');
+	  }  else if(!details.email){
+		setErrors('Email is required');
 	  } else {
 		Axios
 		.post(url, details)
