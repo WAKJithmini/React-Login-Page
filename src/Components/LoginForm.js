@@ -7,7 +7,8 @@ import { Form, Button, Row, Col, Card, Image } from 'react-bootstrap'
 import loginImage from './Logo.jpg'
 import './login.css'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Validation from './Validation';
+/*
+import Validation from './Validation';*/
 import Axios from 'axios';
 
 function LoginForm( )  {
@@ -27,28 +28,35 @@ function LoginForm( )  {
     const submitHandler = e =>{
         e.preventDefault();
         Login(details);
-		setErrors(Validation(details));
+		/*setErrors(Validation(details));*/
          
 		dispatch(login({
 			...details,
 			[e.target.name]: e.target.value, 
 			loggedIn:true,
-		}));
+	}));
 
-        Axios
+	if (!details.email || !details.password) {
+		setErrors('Email and Password required');
+	  } else {
+		Axios
 		.post(url, details)
 		.then(res=>{
 			console.log('Posting data',res);
-            setErrors(Validation(details));
+         /* setErrors(Validation(details));*/
+		 setErrors(res.data.message);
 			if (details.email !== '' && details.password !== ''){
 				navigate('/home', {
 					state: {
-					  email: res.data.data.Name ,
+					  email: res.data.data.Name,
 					}
 				  });
 				console.log('success');
 			}
 		}).catch(err =>console.log(err.res))
+	  }
+	   
+    
 
     };
 
@@ -88,7 +96,6 @@ function LoginForm( )  {
 										value={details.email}
 										onChange={handleChange}
 									></Form.Control>
-									{errors.email && <p className="error">{errors.email}</p>}
 								</Form.Group>
                                  <br/>
 								<Form.Group controlId='password'>
@@ -101,7 +108,7 @@ function LoginForm( )  {
 										value={details.password}
 										onChange={handleChange}
 									></Form.Control>
-									{errors.password && <p className="error">{errors.password}</p>}
+									{errors &&<div className='error'>{errors}</div>}
 								</Form.Group>
                                 <br/>
 								

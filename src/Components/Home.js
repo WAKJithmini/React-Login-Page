@@ -12,8 +12,9 @@ const Home = () => {
     const Logout =(state) => {
       state.user = null; 
     }
+	
 	const location = useLocation();
-  console.log(location);
+    console.log(location);
 
 	return (
 		<div className="logout">

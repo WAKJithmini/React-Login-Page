@@ -1,17 +1,16 @@
-
 const Validation = (details) => {
     let errors={};
 
     if(!details.email){
         errors.email= 'Email cannot be empty';
     }
-   /* if(details.email !== ""){
+    /* if(details.email !== ""){
         errors.email= 'Username is incorrect';
     }*/
     if(!details.password){
         errors.password='Password cannot be empty';
     }
-  /*  if(details.password !== ""){
+    /*  if(details.password !== ""){
         errors.password= 'Password is incorrect';
     }*/
     else if (details.password.length < 5){
